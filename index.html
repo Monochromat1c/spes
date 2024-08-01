@@ -1,0 +1,517 @@
+<html><head><base href="https://love-kezia.com/"><title>Love for Kezia</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300&display=swap');
+
+  body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .container {
+    text-align: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    min-width: 55dvw;
+    box-sizing: border-box;
+    position: relative;
+    margin: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+  }
+
+  #typing-text {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3em;
+    color: black;
+    min-height: 1.5em;
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    z-index: 9999; /* Highest z-index for the text */
+  }
+
+  .hearts, .floating-hearts, .twinkles, .stars, .star-emojis, .chibi-dogs, .balloons, .roses, .blushing-emojis {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 999;
+  }
+
+  .heart, .star-emoji, .chibi-dog, .balloon, .rose, .blushing-emoji {
+    position: absolute;
+    font-size: 20px;
+    user-select: none;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    filter: drop-shadow(0 0 2px rgba(255,255,255,0.7));
+  }
+
+  .heart:hover, .star-emoji:hover, .chibi-dog:hover, .balloon:hover, .rose:hover, .blushing-emoji:hover {
+    transform: scale(1.2);
+  }
+
+  .twinkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle 2s infinite;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
+  }
+
+  .star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: starTwinkle 2s infinite;
+    box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff00de, 0 0 35px #ff00de, 0 0 40px #ff00de, 0 0 50px #ff00de, 0 0 75px #ff00de;
+  }
+
+  .chibi-dog {
+    width: 30px;
+    height: 30px;
+    background-image: url('https://www.pngwing.com/en/free-png-yhmgz');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.9));
+  }
+
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+
+  @keyframes starTwinkle {
+    0%, 100% { opacity: 0; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+    100% { transform: translateY(0) rotate(360deg); }
+  }
+
+  @keyframes fall {
+    to { transform: translateY(100vh) rotate(720deg); }
+  }
+
+  @keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); opacity: 0; }
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background-color: black;
+    margin-left: 2px;
+    animation: blink 0.7s infinite;
+    vertical-align: text-bottom;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    z-index: 9999; /* Highest z-index for the cursor */
+  }
+
+  @media (max-width: 600px) {
+    #typing-text {
+      font-size: 2em;
+    }
+    .container {
+      min-width: calc(100% - 40px);
+      margin: 20px;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="hearts"></div>
+<div class="floating-hearts"></div>
+<div class="twinkles"></div>
+<div class="stars"></div>
+<div class="star-emojis"></div>
+<div class="chibi-dogs"></div>
+<div class="balloons"></div>
+<div class="roses"></div>
+<div class="blushing-emojis"></div>
+<div class="container">
+  <div id="typing-text"></div><span class="cursor"></span>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+  const phrases = [
+    'Kezia',
+    'You have such an endearing smile.',
+    'Your laughter brightens my day.',
+    'You inspire me to be a better person.',
+    'Your presence fills my heart with joy.'
+  ];
+
+  let typed = new Typed('#typing-text', {
+    strings: phrases,
+    typeSpeed: 80,
+    backSpeed: 40,
+    backDelay: 2000,
+    startDelay: 1000,
+    loop: true,
+    showCursor: false,
+  });
+
+  const MAX_FLOATING_EMOJIS = 40;
+  let floatingEmojiCount = 0;
+
+  function createFloatingElement(container, emoji, className) {
+    if (floatingEmojiCount >= MAX_FLOATING_EMOJIS) return;
+
+    const element = document.createElement('div');
+    element.classList.add(className);
+    element.innerText = emoji;
+    element.style.fontSize = Math.random() * 20 + 10 + 'px';
+    element.style.position = 'absolute';
+    element.style.opacity = 0; // Start with opacity 0
+    element.style.left = Math.random() * 100 + 'vw';
+    element.style.top = Math.random() * 100 + 'vh';
+    element.style.animation = `float ${Math.random() * 3 + 5}s infinite`;
+    element.dataset.createdAt = Date.now();
+
+    container.appendChild(element);
+    floatingEmojiCount++;
+
+    element.addEventListener('click', () => {
+      popElement(element);
+    });
+
+    // Fade in the element
+    anime({
+      targets: element,
+      opacity: [0, Math.random() * 0.5 + 0.5],
+      duration: 1000,
+      easing: 'easeInOutQuad'
+    });
+
+    anime({
+      targets: element,
+      rotate: {
+        value: '1turn',
+        duration: 2000,
+        easing: 'easeInOutQuad'
+      },
+      scale: [
+        {value: 1.1, duration: 250, easing: 'easeInOutQuad'},
+        {value: 1, duration: 250, easing: 'easeInOutQuad'}
+      ],
+      loop: true
+    });
+  }
+
+  function createHeart(container, isFloating = false) {
+    if (isFloating) {
+      createFloatingElement(container, '❤️', 'heart');
+    } else {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.innerText = '❤️';
+      heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+      heart.style.position = 'absolute';
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      
+      const containerRect = document.querySelector('.container').getBoundingClientRect();
+      const side = Math.floor(Math.random() * 4);
+      
+      switch(side) {
+        case 0: // Top
+          heart.style.left = containerRect.left + Math.random() * containerRect.width + 'px';
+          heart.style.top = containerRect.top - 20 + 'px';
+          break;
+        case 1: // Right
+          heart.style.left = containerRect.right + 'px';
+          heart.style.top = containerRect.top + Math.random() * containerRect.height + 'px';
+          break;
+        case 2: // Bottom
+          heart.style.left = containerRect.left + Math.random() * containerRect.width + 'px';
+          heart.style.top = containerRect.bottom + 'px';
+          break;
+        case 3: // Left
+          heart.style.left = containerRect.left - 20 + 'px';
+          heart.style.top = containerRect.top + Math.random() * containerRect.height + 'px';
+          break;
+      }
+      
+      heart.style.animation = `fall ${Math.random() * 3 + 2}s linear`;
+
+      container.appendChild(heart);
+
+      heart.addEventListener('click', () => {
+        popElement(heart);
+      });
+
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+
+      anime({
+        targets: heart,
+        rotate: {
+          value: '1turn',
+          duration: 2000,
+          easing: 'easeInOutQuad'
+        },
+        scale: [
+          {value: 1.1, duration: 250, easing: 'easeInOutQuad'},
+          {value: 1, duration: 250, easing: 'easeInOutQuad'}
+        ],
+        loop: true
+      });
+    }
+  }
+
+  function createStar() {
+    const star = document.createElement('div');
+    star.classList.add('star');
+    star.style.left = Math.random() * 100 + 'vw';
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.animationDelay = Math.random() * 2 + 's';
+    star.dataset.createdAt = Date.now();
+    document.querySelector('.stars').appendChild(star);
+
+    anime({
+      targets: star,
+      opacity: [0, 1],
+      scale: [0, 1],
+      easing: 'easeOutElastic(1, .8)',
+      duration: 1000,
+      loop: true,
+      direction: 'alternate'
+    });
+  }
+
+  function createStarEmoji() {
+    createFloatingElement(document.querySelector('.star-emojis'), '⭐', 'star-emoji');
+  }
+
+  function createChibiDog() {
+    if (floatingEmojiCount >= MAX_FLOATING_EMOJIS) return;
+
+    const chibiDog = document.createElement('div');
+    chibiDog.classList.add('chibi-dog');
+    chibiDog.style.left = Math.random() * 100 + 'vw';
+    chibiDog.style.top = '-30px';
+    chibiDog.style.animation = `fall ${Math.random() * 3 + 5}s linear`;
+    chibiDog.dataset.createdAt = Date.now();
+    document.querySelector('.chibi-dogs').appendChild(chibiDog);
+    floatingEmojiCount++;
+
+    chibiDog.addEventListener('click', () => {
+      popElement(chibiDog);
+    });
+
+    setTimeout(() => {
+      chibiDog.remove();
+      floatingEmojiCount--;
+    }, 8000);
+
+    anime({
+      targets: chibiDog,
+      rotate: {
+        value: '2turn',
+        duration: 8000,
+        easing: 'linear'
+      },
+      scale: [
+        {value: 1.2, duration: 1000, easing: 'easeInOutQuad'},
+        {value: 1, duration: 1000, easing: 'easeInOutQuad'}
+      ],
+      loop: true
+    });
+  }
+
+  function createBalloon() {
+    createFloatingElement(document.querySelector('.balloons'), '🎈', 'balloon');
+  }
+
+  function createRose() {
+    createFloatingElement(document.querySelector('.roses'), '🌹', 'rose');
+  }
+
+  function createBlushingEmoji() {
+    createFloatingElement(document.querySelector('.blushing-emojis'), '😊', 'blushing-emoji');
+  }
+
+  function popElement(element) {
+    element.style.animation = 'pop 0.5s ease-out';
+    createTwinkle(element.offsetLeft, element.offsetTop);
+    element.addEventListener('animationend', () => {
+      element.remove();
+      floatingEmojiCount--;
+    });
+  }
+
+  function createTwinkle(x, y) {
+    const twinkle = document.createElement('div');
+    twinkle.classList.add('twinkle');
+    twinkle.style.left = x + 'px';
+    twinkle.style.top = y + 'px';
+    twinkle.style.animationDelay = Math.random() * 2 + 's';
+    document.querySelector('.twinkles').appendChild(twinkle);
+    setTimeout(() => twinkle.remove(), 2000);
+
+    anime({
+      targets: twinkle,
+      scale: [0, 1, 0],
+      opacity: [0, 1, 0],
+      easing: 'easeInOutExpo',
+      duration: 2000
+    });
+  }
+
+  setInterval(() => createHeart(document.querySelector('.hearts')), 300);
+  setInterval(() => {
+    if (floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      createHeart(document.querySelector('.floating-hearts'), true);
+    }
+  }, 1000);
+  setInterval(() => createStar(), 500);
+  setInterval(() => {
+    if (floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      createStarEmoji();
+    }
+  }, 1500);
+  setInterval(() => {
+    if (floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      createChibiDog();
+    }
+  }, 2000);
+  setInterval(() => {
+    if (floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      createBalloon();
+    }
+  }, 1200);
+  setInterval(() => {
+    if (floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      createRose();
+    }
+  }, 1800);
+  setInterval(() => {
+    if (floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      createBlushingEmoji();
+    }
+  }, 1600);
+
+  for (let i = 0; i < 50; i++) {
+    createTwinkle(Math.random() * window.innerWidth, Math.random() * window.innerHeight);
+    createStar();
+  }
+
+  // Gradually spawn initial floating emojis
+  function spawnInitialEmojis(count, delay) {
+    if (count > 0 && floatingEmojiCount < MAX_FLOATING_EMOJIS) {
+      setTimeout(() => {
+        const randomChoice = Math.floor(Math.random() * 5);
+        switch (randomChoice) {
+          case 0:
+            createStarEmoji();
+            break;
+          case 1:
+            createBalloon();
+            break;
+          case 2:
+            createRose();
+            break;
+          case 3:
+            createBlushingEmoji();
+            break;
+          case 4:
+            createHeart(document.querySelector('.floating-hearts'), true);
+            break;
+        }
+        spawnInitialEmojis(count - 1, delay);
+      }, delay);
+    }
+  }
+
+  spawnInitialEmojis(MAX_FLOATING_EMOJIS, 200);
+
+  // Pop floating elements after 15 seconds
+  setInterval(() => {
+    const now = Date.now();
+    
+    const floatingElements = document.querySelectorAll('.floating-hearts .heart, .star-emojis .star-emoji, .chibi-dogs .chibi-dog, .balloons .balloon, .roses .rose, .blushing-emojis .blushing-emoji');
+    floatingElements.forEach(element => {
+      const createdAt = parseInt(element.dataset.createdAt);
+      if (now - createdAt > 15000) {
+        popElement(element);
+      }
+    });
+
+    const stars = document.querySelectorAll('.stars .star');
+    stars.forEach(star => {
+      const createdAt = parseInt(star.dataset.createdAt);
+      if (now - createdAt > 15000) {
+        star.style.animation = 'pop 0.5s ease-out';
+        star.addEventListener('animationend', () => star.remove());
+      }
+    });
+  }, 1000);
+
+  // Add parallax effect to floating elements
+  document.addEventListener('mousemove', (e) => {
+    const moveX = (e.clientX - window.innerWidth / 2) * 0.01;
+    const moveY = (e.clientY - window.innerHeight / 2) * 0.01;
+
+    anime({
+      targets: ['.floating-hearts .heart', '.star-emojis .star-emoji', '.chibi-dogs .chibi-dog', '.balloons .balloon', '.roses .rose', '.blushing-emojis .blushing-emoji'],
+      translateX: moveX,
+      translateY: moveY,
+      duration: 1000,
+      easing: 'easeOutQuad'
+    });
+  });
+
+  // Add a subtle pulse animation to the container
+  anime({
+    targets: '.container',
+    scale: [1, 1.02, 1],
+    duration: 3000,
+    easing: 'easeInOutQuad',
+    loop: true
+  });
+</script>
+</body>
+</html>
