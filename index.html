@@ -1,0 +1,174 @@
+<html>
+
+<head>
+  <title>A Special Message for Kezia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300&display=swap');
+
+    html {
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .envelope-link {
+      text-decoration: none;
+      display: block;
+      margin-bottom: 1rem;
+      /* Standard spacing */
+    }
+
+    .envelope {
+      width: 200px;
+      height: 120px;
+      background-color: #f0f0f0;
+      position: relative;
+      margin: 0 auto;
+      border-radius: 0 0 10px 10px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .envelope:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-top: 70px solid #e0e0e0;
+      transition: all 0.3s ease;
+    }
+
+    .envelope:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-left: 100px solid transparent;
+      border-right: 100px solid transparent;
+      border-bottom: 70px solid #d0d0d0;
+      z-index: -1;
+    }
+
+    .link:hover~.envelope-link .envelope,
+    .envelope-link:hover .envelope {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .link:hover~.envelope-link .envelope:before,
+    .envelope-link:hover .envelope:before {
+      transform: rotateX(180deg);
+      transform-origin: top;
+    }
+
+    .link {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #ff6b6b;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .link:hover {
+      background-color: #ff6b6b;
+      color: white;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 600px) {
+      .envelope {
+        width: 150px;
+        height: 90px;
+      }
+
+      .envelope:before {
+        border-left-width: 75px;
+        border-right-width: 75px;
+        border-top-width: 52.5px;
+      }
+
+      .envelope:after {
+        border-left-width: 75px;
+        border-right-width: 75px;
+        border-bottom-width: 52.5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <a href="love-message.html" class="envelope-link">
+      <div class="envelope"></div>
+    </a>
+    <a href="love-message.html" class="link">Open the envelope</a>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+  <script>
+    // Add a subtle floating animation to the envelope
+    anime({
+      targets: '.envelope',
+      translateY: ['0px', '-10px'],
+      direction: 'alternate',
+      loop: true,
+      easing: 'easeInOutQuad',
+      duration: 1500
+    });
+
+    // Add a pulsing animation to the link
+    anime({
+      targets: '.link',
+      scale: [1, 1.05, 1],
+      opacity: [0.9, 1, 0.9],
+      loop: true,
+      easing: 'easeInOutQuad',
+      duration: 2000
+    });
+  </script>
+</body>
+
+</html>
